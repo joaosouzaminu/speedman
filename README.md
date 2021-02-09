@@ -14,11 +14,11 @@ $ npm install
 
 Run the script using a terminal and passing the arguments as follow:
 
-| Argument     | Description                                                          | Example                                   |
-|--------------|----------------------------------------------------------------------|-------------------------------------------|
-| --collection | A postman collection exported to JSON format                         | `./my-collection.postman_collection.json` |
-| --instances  | The amount of instances to run in parallel                           | `10`                                      |
-| --count      | The total amount of requests to be distributed between the instances | `10`                                      |
+| Argument   | Description                                                          | Example                                   |
+|------------|----------------------------------------------------------------------|-------------------------------------------|
+| collection | A postman collection exported to JSON format                         | `./my_collection.postman_collection.json` |
+| instances  | The amount of instances to run in parallel                           | `10`                                      |
+| count      | The total amount of requests to be distributed between the instances | `10`                                      |
 
 ## Full Example
 
