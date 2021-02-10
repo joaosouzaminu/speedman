@@ -1,4 +1,6 @@
 const newman = require('newman');
+const Spinnies = require('spinnies');
+const spinnies = new Spinnies();
 
 class Speedman {
   constructor(cliArguments) {
@@ -50,13 +52,16 @@ class Speedman {
 
   _runnerFactory(collection, iterationCount) {
     return () => new Promise((resolve, reject) => {
+      const instance = this.instanceCounter++;
+      spinnies.add(`spinner-${instance}`, { text: `Processing Instance ${instance}` });
+
       newman.run({
         collection: require(collection),
         silent: true,
         iterationCount
       }, (error, summary) => {
         if (error) reject(error);
-        console.log(`*** Finished Instance ${this.instanceCounter++} ***`)
+        spinnies.succeed(`spinner-${instance}`, { text: `Finished Instance ${instance}` });
         resolve(summary)
       })
     })
@@ -67,7 +72,7 @@ class Speedman {
 
     console.log(`*** Started running ${instances} instances for ${count} requests ***`);
     await Promise.all(this.runners.map(runner => runner()));
-    console.log('** Finished running **');
+    console.log('*** Finished running ***');
   }
 }
 
