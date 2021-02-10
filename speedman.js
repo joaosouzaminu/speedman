@@ -1,13 +1,14 @@
 const newman = require('newman');
 
 class Speedman {
-  constructor() {
-    this.arguments = {
+  constructor(cliArguments) {
+    this.arguments = cliArguments || {
       collection: null,
       instances: null,
       count: null
     }
 
+    this._shouldGetArguments = !cliArguments;
     this.runners = [];
     this.instanceCounter = 1;
   }
@@ -19,7 +20,7 @@ class Speedman {
   }
 
   _getArguments() {
-    this._readCLIArguments();
+    this._shouldGetArguments && this._readCLIArguments();
     this._validateArguments();
   }
 
